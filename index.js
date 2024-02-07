@@ -6,9 +6,9 @@ const cors = require('cors')
 app.use(express.json())
 app.use(cors())
 app.use(express.static('dist'))
-morgan.token('id', function getId (req) {
+morgan.token('id', function getId(req) {
     return JSON.stringify(req.body)
-  })
+})
 app.use(morgan(':id :method :url :response-time'))
 
 
@@ -34,7 +34,7 @@ let persons = [
         "number": "39-23-6423122"
     },
 
-    
+
 ]
 
 const generateId = () => {
