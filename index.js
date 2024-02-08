@@ -56,8 +56,8 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-    Person.find({}).then(persons => {
-        res.json(persons)
+    Person.find({}).then(person => {
+        res.json(person)
       })
     
 })
@@ -95,14 +95,15 @@ app.post('/api/persons', (req, res) => {
         })
     }
 
-    const person = {
-        id: Math.random(),
+    const person = new Person({
+        
         name: body.name,
         number: body.number,
 
-    }
-    persons = persons.concat(person)
-    res.json(person)
+    })
+    person.save().then(savedPerson => {
+        res.json(savedPerson)
+      })
 })
 
 
