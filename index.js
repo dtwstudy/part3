@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 var morgan = require('morgan')
 const cors = require('cors')
+const mongoose = require('mongoose')
+const Person = require('./models/person')
 
 app.use(express.json())
 app.use(cors())
@@ -10,6 +12,8 @@ morgan.token('id', function getId(req) {
     return JSON.stringify(req.body)
 })
 app.use(morgan(':id :method :url :response-time'))
+
+
 
 
 let persons = [
@@ -52,7 +56,10 @@ app.get('/info', (req, res) => {
 })
 
 app.get('/api/persons', (req, res) => {
-    res.json(persons)
+    Person.find({}).then(persons => {
+        res.json(persons)
+      })
+    
 })
 
 app.get('/api/persons/:id', (req, res) => {
