@@ -67,7 +67,7 @@ app.post('/api/persons', (req, res, next) => {
   const body = req.body
 
   Person.findOne({ name: body.name }).then(person => {
-    if (person == null) {
+    if (person === null) {
       const person = new Person({ name: body.name, number: body.number, })
       person.save().then(savedPerson => { return res.json(savedPerson) }).catch(error => next(error))
     }
